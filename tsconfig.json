@@ -27,10 +27,11 @@
 		"pretty": false,
 		"noEmitOnError": true,
 		"rootDir": "source",
-		"strict": true   /* enable all strict type-checking options */
+		"strict": true
 	},
 	"exclude": [
 		"node_modules",
-		".vscode-test"
+		".vscode-test",
+		"out"
 	]
 }
