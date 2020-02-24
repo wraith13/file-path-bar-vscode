@@ -1,4 +1,12 @@
 import * as vscode from 'vscode';
+import * as Config from "./lib/config";
+const statusBarAlignmentObject = Object.freeze
+({
+	"none": undefined,
+	"left": vscode.StatusBarAlignment.Left,
+	"right": vscode.StatusBarAlignment.Right,
+});
+export const statusBarAlignment = new Config.MapEntry("filePathBar.statusBarAlignment", statusBarAlignmentObject);
 module StatusBarItem
 {
 	const create =
@@ -31,7 +39,7 @@ module StatusBarItem
 	let pathLabel: vscode.StatusBarItem;
 	export const make = () => pathLabel = create
 	({
-		alignment: vscode.StatusBarAlignment.Left,
+		alignment: statusBarAlignment.get(""),
 		text: `$(file) dummy`,
 		command: `filePathBar.menu`,
 		tooltip: `Copy...`,

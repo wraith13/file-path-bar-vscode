@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "commonjs",
+		"moduleResolution": "node",
 		"declaration": true,
 		"target": "es6",
 		"outDir": "out",
@@ -26,8 +27,9 @@
 		"skipLibCheck": false,
 		"pretty": false,
 		"noEmitOnError": true,
-		"rootDir": "source",
-		"strict": true
+		"rootDir": ".",
+		"resolveJsonModule": true,
+		"esModuleInterop": true
 	},
 	"exclude": [
 		"node_modules",

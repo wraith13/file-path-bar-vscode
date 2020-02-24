@@ -13,7 +13,7 @@
 	"activationEvents": [
 		"*"
 	],
-	"main": "./out/extension.js",
+	"main": "./out/source/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -29,7 +29,24 @@
 					"when": "existsActiveTextDocument"
 				}
 			]
-		}
+		},
+		"configuration": [
+			{
+				"title": "File Path Bar",
+				"properties": {
+					"filePathBar.statusBarAlignment": {
+						"type": "string",
+						"enum": [
+							"none",
+							"left",
+							"right"
+						],
+						"default": "left",
+						"description": "Alignment on status bar. Requires a restart to take effect."
+					}
+				}
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
