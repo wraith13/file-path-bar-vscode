@@ -1,27 +1,103 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "file-path-bar" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
+module StatusBarItem
+{
+	const create =
+	(
+		properties :
+		{
+			alignment ? : vscode.StatusBarAlignment,
+			text ? : string,
+			command ? : string,
+			tooltip ? : string
+		}
+	)
+	: vscode.StatusBarItem =>
+	{
+		const result = vscode.window.createStatusBarItem(properties.alignment);
+		if (undefined !== properties.text)
+		{
+			result.text = properties.text;
+		}
+		if (undefined !== properties.command)
+		{
+			result.command = properties.command;
+		}
+		if (undefined !== properties.tooltip)
+		{
+			result.tooltip = properties.tooltip;
+		}
+		return result;
+	};
+	let pathLabel: vscode.StatusBarItem;
+	export const make = () => pathLabel = create
+	({
+		alignment: vscode.StatusBarAlignment.Left,
+		text: `$(file) dummy`,
+		command: `filePathBar.menu`,
+		tooltip: `Copy...`,
 	});
-
-	context.subscriptions.push(disposable);
+	export const update = () : void =>
+	{
+		const fileName = vscode.window.activeTextEditor?.document.fileName;
+		if (fileName)
+		{
+			pathLabel.text = `$(file) ${fileName}`;
+			pathLabel.show();
+		}
+		else
+		{
+			pathLabel.hide();
+		}
+	};
 }
-
-// this method is called when your extension is deactivated
-export function deactivate() {}
+module FilePathBar
+{
+	export const activate = (context: vscode.ExtensionContext) =>
+	{
+		context.subscriptions.push
+		(
+			StatusBarItem.make(),
+			vscode.commands.registerCommand(`filePathBar.menu`, menu),
+			vscode.window.onDidChangeActiveTextEditor(update),
+		);
+		update();
+	};
+	export const deactivate = () =>
+	{
+	};
+	export const update = async () =>
+	{
+		await vscode.commands.executeCommand
+		(
+			'setContext',
+			'existsActiveTextDocument',
+			undefined !== vscode.window.activeTextEditor
+		);
+		StatusBarItem.update();
+	};
+	export const menu = async () =>
+	{
+		const document = vscode.window.activeTextEditor?.document;
+		if (document)
+		{
+			await
+			(
+				await vscode.window.showQuickPick
+				([
+					{
+						label: "$(clippy) Copy Fie Path",
+						description: document.fileName,
+						action: async () => await vscode.env.clipboard.writeText(document.fileName),
+					},
+					{
+						label: "$(folder-opened) Show Folder",
+						action: async () => vscode.env.openExternal(vscode.Uri.parse(document.fileName +"/..")),
+					},
+				])
+			)
+			?.action();
+		}
+	};
+}
+export const activate = FilePathBar.activate;
+export const deactivate = FilePathBar.deactivate;

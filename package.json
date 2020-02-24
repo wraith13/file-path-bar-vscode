@@ -11,16 +11,25 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "filePathBar.menu",
+				"title": "Show Menu",
+				"category": "File Path Bar"
 			}
-		]
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "filePathBar.menu",
+					"when": "existsActiveTextDocument"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
