@@ -42,7 +42,7 @@
 							"right"
 						],
 						"default": "left",
-						"description": "Alignment on status bar. Requires a restart to take effect."
+						"description": "%filePathBar.statusBarAlignment.description%"
 					}
 				}
 			}

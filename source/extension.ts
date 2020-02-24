@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as Config from "./lib/config";
+import * as Locale from "./lib/locale";
 const statusBarAlignmentObject = Object.freeze
 ({
 	"none": undefined,
@@ -93,12 +94,12 @@ module FilePathBar
 				await vscode.window.showQuickPick
 				([
 					{
-						label: "$(clippy) Copy Fie Path",
+						label: `$(clippy) ${Locale.map("Copy File Path")}`,
 						description: document.fileName,
 						action: async () => await vscode.env.clipboard.writeText(document.fileName),
 					},
 					{
-						label: "$(folder-opened) Show Folder",
+						label: `$(folder-opened) ${Locale.map("Show Folder")}`,
 						action: async () => vscode.env.openExternal(vscode.Uri.parse(document.fileName +"/..")),
 					},
 				])
