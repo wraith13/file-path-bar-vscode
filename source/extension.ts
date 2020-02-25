@@ -8,6 +8,7 @@ const statusBarAlignmentObject = Object.freeze
 	"right": vscode.StatusBarAlignment.Right,
 });
 export const statusBarAlignment = new Config.MapEntry("filePathBar.statusBarAlignment", statusBarAlignmentObject);
+const hasActiveDocument = () => undefined !== vscode.window.activeTextEditor && undefined !== vscode.window.activeTextEditor.viewColumn;
 module StatusBarItem
 {
 	const create =
@@ -47,10 +48,10 @@ module StatusBarItem
 	});
 	export const update = () : void =>
 	{
-		const fileName = vscode.window.activeTextEditor?.document.fileName;
-		if (fileName)
+		const document = vscode.window.activeTextEditor?.document;
+		if (hasActiveDocument() && document)
 		{
-			pathLabel.text = `$(file) ${fileName}`;
+			pathLabel.text = `$(file) ${document.fileName}`;
 			pathLabel.show();
 		}
 		else
@@ -80,14 +81,14 @@ module FilePathBar
 		(
 			'setContext',
 			'existsActiveTextDocument',
-			undefined !== vscode.window.activeTextEditor
+			hasActiveDocument()
 		);
 		StatusBarItem.update();
 	};
 	export const menu = async () =>
 	{
 		const document = vscode.window.activeTextEditor?.document;
-		if (document)
+		if (hasActiveDocument() && document)
 		{
 			await
 			(
