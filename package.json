@@ -4,9 +4,18 @@
 	"description": "Show file path in status bar.",
 	"icon": "images/pathhex.128.png",
 	"version": "0.0.1",
+	"publisher": "wraith13",
 	"license": "SEE LICENSE IN LICENSE_1_0.txt",
 	"engines": {
 		"vscode": "^1.42.0"
+	},
+	"bugs": {
+		"url": "https://github.com/wraith13/file-path-bar-vscode/issues"
+	},
+	"homepage": "https://github.com/wraith13/file-path-bar-vscode",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wraith13/file-path-bar-vscode.git"
 	},
 	"categories": [
 		"Other"
