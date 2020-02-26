@@ -51,7 +51,7 @@ module StatusBarItem
 		const document = vscode.window.activeTextEditor?.document;
 		if (hasActiveDocument() && document)
 		{
-			pathLabel.text = `$(file) ${document.fileName}`;
+			pathLabel.text = `${document.isDirty ? "$(primitive-dot)": "$(file)"} ${document.fileName}`;
 			pathLabel.show();
 		}
 		else
@@ -69,6 +69,8 @@ module FilePathBar
 			StatusBarItem.make(),
 			vscode.commands.registerCommand(`filePathBar.menu`, menu),
 			vscode.window.onDidChangeActiveTextEditor(update),
+			vscode.workspace.onDidChangeTextDocument(update),
+			vscode.workspace.onDidSaveTextDocument(update),
 		);
 		update();
 	};
