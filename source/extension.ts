@@ -105,7 +105,7 @@ module FilePathBar
 					{
 						label: `$(folder-opened) ${Locale.map("Show Folder")}`,
 						description: extractDirectory(document.fileName),
-						action: async () => vscode.env.openExternal(vscode.Uri.parse(extractDirectory(document.fileName))),
+						action: async () => vscode.env.openExternal(vscode.Uri.parse(extractDirectory(document.uri.toString()))),
 					},
 				])
 			)
