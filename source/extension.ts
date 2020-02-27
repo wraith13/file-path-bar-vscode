@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as Config from "./lib/config";
 import * as Locale from "./lib/locale";
+const extractDirectory = (path : string) : string => path.replace(/^(.*[\\//])([^\\//]+)$/, "$1");
 const statusBarAlignmentObject = Object.freeze
 ({
 	"none": undefined,
@@ -103,7 +104,8 @@ module FilePathBar
 					},
 					{
 						label: `$(folder-opened) ${Locale.map("Show Folder")}`,
-						action: async () => vscode.env.openExternal(vscode.Uri.parse(document.fileName +"/..")),
+						description: extractDirectory(document.fileName),
+						action: async () => vscode.env.openExternal(vscode.Uri.parse(extractDirectory(document.fileName))),
 					},
 				])
 			)
