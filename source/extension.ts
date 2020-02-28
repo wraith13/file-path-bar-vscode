@@ -99,12 +99,12 @@ module FilePathBar
 				([
 					{
 						label: `$(clippy) ${Locale.map("Copy File Path")}`,
-						description: document.fileName,
+						detail: document.fileName,
 						action: async () => await vscode.env.clipboard.writeText(document.fileName),
 					},
 					{
 						label: `$(folder-opened) ${Locale.map("Show Folder")}`,
-						description: extractDirectory(document.fileName),
+						detail: extractDirectory(document.fileName),
 						action: async () => vscode.env.openExternal(vscode.Uri.parse(extractDirectory(document.uri.toString()))),
 					},
 				])
