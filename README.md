@@ -1,65 +1,61 @@
-# file-path-bar README
+# File Path Bar README
 
-This is the README for your extension "file-path-bar". After writing up a brief description, we recommend including the following sections.
+[![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/version/wraith13.file-path-bar.svg) ![installs](https://vsmarketplacebadge.apphb.com/installs/wraith13.file-path-bar.svg) ![rating](https://vsmarketplacebadge.apphb.com/rating/wraith13.file-path-bar.svg)](https://marketplace.visualstudio.com/items?itemName=wraith13.file-path-bar)
+
+Show active file path in status bar.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+File Path Bar scans your code and enumerates all tokens and provides access to them.
 
-For example if there is an image subfolder under your extension project workspace:
+![screenshot](images/screenshot.png)
 
-\!\[feature X\]\(images/feature-x.png\)
+## Tutorial
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### 0. ⬇️ Install File Path Bar
 
-## Requirements
+Show extension side bar within VS Code(Mac:<kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>, Windows and Linux: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>), type `file-path-bar` and press <kbd>Enter</kbd> and click <kbd>Install</kbd>. Restart VS Code when installation is completed.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### 1. 👀 Active file path in status bar.
+
+The active file path is automatically displayed in status bar. Click to copy the path or browse to the folder where the file is stored.
+
+### 2. 🔧 Next step
+
+You can change [settings](#extension-settings) by `settings.json`. And you can apply [keyboard shortcuts](#keyboard-shortcut-settings) by `keybindings.json`.
+
+Enjoy!
+
+## Commands
+
+* `File Path Bar: Show Menu ...` : Show File Path Bar menu.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This extension contributes the following settings by [`settings.json`](https://code.visualstudio.com/docs/customization/userandworkspace#_creating-user-and-workspace-settings)( Mac: <kbd>Command</kbd>+<kbd>,</kbd>, Windows / Linux: <kbd>File</kbd> -> <kbd>Preferences</kbd> -> <kbd>User Settings</kbd> ):
 
-For example:
+* `filePathBar.statusBarAlignment`: Alignment on status bar. Requires a restart to take effect.
 
-This extension contributes the following settings:
+## Keyboard shortcut Settings
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+In default, filePathBar's commands doesn't apply keyboard shortcuts. Althogh,
+you can apply keyboard shortcuts by [`keybindings.json`](https://code.visualstudio.com/docs/customization/keybindings#_customizing-shortcuts)
+( Mac: <kbd>Code</kbd> -> <kbd>Preferences</kbd> -> <kbd>Keyboard Shortcuts</kbd>, Windows / Linux: <kbd>File</kbd> -> <kbd>Preferences</kbd> -> <kbd>Keyboard Shortcuts</kbd>).
 
-## Known Issues
+Command name on `keybindings.json` is diffarent from on Command Pallete. See below table.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+|on Command Pallete|on keybindings.json|
+|-|-|
+|`File Path Bar: Show Menu ...`|`filePathBar.menu`|
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+see ChangLog on [marketplace](https://marketplace.visualstudio.com/items/wraith13.file-path-bar/changelog) or [github](https://github.com/wraith13/file-path-bar-vscode/blob/master/CHANGELOG.md)
 
-### 1.0.0
+## Support
 
-Initial release of ...
+[GitHub Issues](https://github.com/wraith13/file-path-bar-vscode/issues)
 
-### 1.0.1
+## License
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[Boost Software License](https://github.com/wraith13/file-path-bar-vscode/blob/master/LICENSE_1_0.txt)
