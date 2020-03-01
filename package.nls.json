@@ -1,4 +1,5 @@
 {
+    "filePathBar.menu.title": "Show Menu ...",
     "filePathBar.statusBarAlignment.description": "Alignment on status bar. Requires a restart to take effect.",
     "Copy File Path": "Copy File Path",
     "Show Folder": "Show Folder"

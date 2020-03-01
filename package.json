@@ -28,7 +28,7 @@
         "commands": [
             {
                 "command": "filePathBar.menu",
-                "title": "Show Menu",
+                "title": "%filePathBar.menu.title%",
                 "category": "File Path Bar"
             }
         ],
