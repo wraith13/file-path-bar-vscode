@@ -42,7 +42,7 @@ export class Entry<valueT>
             }
         }
         return result;
-    }
+    };
     cache = new Cache
     (
         (languageId: string): valueT =>
