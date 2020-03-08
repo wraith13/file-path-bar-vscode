@@ -52,7 +52,7 @@ module StatusBarItem
         const document = vscode.window.activeTextEditor?.document;
         if ( hasActiveDocument ( ) && document )
         {
-            pathLabel.text = `${document.isDirty ? "$(primitive-dot)": "$(file)"} ${document.fileName}`;
+            pathLabel.text = `${ document.isDirty ? "$(primitive-dot)": "$(file)" } ${ document.fileName }`;
             pathLabel.show ( );
         }
         else
@@ -98,12 +98,12 @@ module FilePathBar
                 await vscode.window.showQuickPick
                 ([
                     {
-                        label: `$(clippy) ${Locale.map("Copy File Path")}`,
+                        label: `$(clippy) ${ Locale.map ( "Copy File Path" ) }`,
                         detail: document.fileName,
                         action: async ( ) => await vscode.env.clipboard.writeText ( document.fileName ),
                     },
                     {
-                        label: `$(folder-opened) ${Locale.map("Show Folder")}`,
+                        label: `$(folder-opened) ${ Locale.map ( "Show Folder" ) }`,
                         detail: extractDirectory ( document.fileName ),
                         action: async ( ) => vscode.env.openExternal
                         (
@@ -118,7 +118,7 @@ module FilePathBar
                     },
                 ])
             )
-            ?.action();
+            ?.action ( );
         }
     };
 }
