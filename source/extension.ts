@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
+import * as os from 'os';
 import * as Config from "./lib/config";
 import * as Locale from "./lib/locale";
-const extractDirectory = ( path : string ) : string => path.replace ( /^(.*[\\//])([^\\//]+)$/, "$1" );
 const statusBarAlignmentObject = Object.freeze
 ({
     "none" : undefined,
@@ -45,7 +45,7 @@ module StatusBarItem
         alignment : statusBarAlignment.get( "" ),
         text : `$(file) dummy`,
         command : `filePathBar.menu`,
-        tooltip : `Copy...`,
+        tooltip : Locale.map ( "filePathBar.menu.title" ),
     });
     export const update = ( ) : void =>
     {
@@ -93,30 +93,57 @@ module FilePathBar
         const document = vscode.window.activeTextEditor?.document;
         if ( hasActiveDocument ( ) && document )
         {
+            const commands:
+            {
+                label: Locale.KeyType,
+                command: string,
+            }[] =
+            [
+                {
+                    label: "darwin" === os.platform() ?
+                        "File: Reval in Finder":
+                        "File: Reval in File Explorer",
+                    command: "revealFileInOS",
+                },
+                {
+                    label: "File: Copy Path of Active File",
+                    command: "copyFilePath",
+                },
+                {
+                    label: "File: Copy Relative Path of Active File",
+                    command: "copyRelativeFilePath",
+                },
+                {
+                    label: "File: Compare Active File With...",
+                    command: "workbench.files.action.compareFileWith",
+                },
+                {
+                    label: "File: Compare Active File with Clipboard",
+                    command: "workbench.files.action.compareWithClipboard",
+                },
+                {
+                    label: "File: Compare Active File with Saved",
+                    command: "workbench.files.action.compareWithSaved",
+                },
+                {
+                    label: "File: Reval Active File in Side Bar",
+                    command: "workbench.files.action.showActiveFileInExplorer",
+                }
+            ];
             await
             (
                 await vscode.window.showQuickPick
-                ([
-                    {
-                        label: `$(clippy) ${ Locale.map ( "Copy File Path" ) }`,
-                        detail: document.fileName,
-                        action: async ( ) => await vscode.env.clipboard.writeText ( document.fileName ),
-                    },
-                    {
-                        label: `$(folder-opened) ${ Locale.map ( "Show Folder" ) }`,
-                        detail: extractDirectory ( document.fileName ),
-                        action: async ( ) => vscode.env.openExternal
-                        (
-                            vscode.Uri.parse
-                            (
-                                extractDirectory
-                                (
-                                    document.uri.toString ( )
-                                )
-                            )
-                        ),
-                    },
-                ])
+                (
+                    commands.map
+                    (
+                        i =>
+                        ({
+                            label: Locale.map ( i.label ),
+                            detail: i.label === Locale.map ( i.label ) ? undefined: i.label,
+                            action: async ( ) => await vscode.commands.executeCommand ( i.command, document.uri ),
+                        })
+                    )
+                )
             )
             ?.action ( );
         }

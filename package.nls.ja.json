@@ -1,8 +1,6 @@
 {
     "filePathBar.menu.title": "メニューを表示",
     "filePathBar.statusBarAlignment.description": "ステータスバーでの表示位置。有効にするには再起動が必要です。",
-    "Copy File Path": "ファイルのパスをコピー",
-    "Show Folder": "フォルダを表示",
     "File: Reval in File Explorer": "FILE: エクスプローラーで表示する",
     "File: Reval in Finder": "FILE: Finder で表示します",
     "File: Copy Path of Active File": "FILE: アクティブ ファイルのパスのコピー",
