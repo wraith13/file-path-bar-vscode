@@ -142,7 +142,10 @@ module FilePathBar
                             detail: i.label === Locale.map ( i.label ) ? undefined: i.label,
                             action: async ( ) => await vscode.commands.executeCommand ( i.command, document.uri ),
                         })
-                    )
+                    ),
+                    {
+                        matchOnDetail: true,
+                    }
                 )
             )
             ?.action ( );
