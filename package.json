@@ -7,7 +7,7 @@
     "publisher": "wraith13",
     "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {
-        "vscode": "^1.42.0"
+        "vscode": "^1.44.0"
     },
     "bugs": {
         "url": "https://github.com/wraith13/file-path-bar-vscode/issues"
