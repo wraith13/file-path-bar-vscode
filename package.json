@@ -53,6 +53,15 @@
                         ],
                         "default": "left",
                         "description": "%filePathBar.statusBarAlignment.description%"
+                    },
+                    "filePathBar.pathStyle": {
+                        "type": "string",
+                        "enum": [
+                            "absolute",
+                            "relative"
+                        ],
+                        "default": "absolute",
+                        "description": "%filePathBar.pathStyle.description%"
                     }
                 }
             }

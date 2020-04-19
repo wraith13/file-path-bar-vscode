@@ -9,6 +9,12 @@ const statusBarAlignmentObject = Object.freeze
     "right" : vscode.StatusBarAlignment.Right,
 });
 export const statusBarAlignment = new Config.MapEntry ( "filePathBar.statusBarAlignment", statusBarAlignmentObject );
+const pathStyleObject = Object.freeze
+({
+    "absolute" : (path: string) => path,
+    "relative" : (path: string) => vscode.workspace.asRelativePath(path),
+});
+export const pathStyle = new Config.MapEntry ( "filePathBar.pathStyle", pathStyleObject );
 const hasActiveDocument = ( ) => undefined !== vscode.window.activeTextEditor && undefined !== vscode.window.activeTextEditor.viewColumn;
 module StatusBarItem
 {
@@ -52,7 +58,7 @@ module StatusBarItem
         const document = vscode.window.activeTextEditor?.document;
         if ( hasActiveDocument ( ) && document )
         {
-            pathLabel.text = `${ document.isDirty ? "$(primitive-dot)": "$(file)" } ${ document.fileName }`;
+            pathLabel.text = `${ document.isDirty ? "$(primitive-dot)": "$(file)" } ${ pathStyle.get( "" )( document.fileName ) }`;
             pathLabel.show ( );
         }
         else
@@ -69,6 +75,14 @@ module FilePathBar
         (
             StatusBarItem.make ( ),
             vscode.commands.registerCommand ( `filePathBar.menu`, menu ),
+            vscode.workspace.onDidChangeConfiguration
+            (
+                async () =>
+                {
+                    pathStyle.clear();
+                    await update();
+                }
+            ),
             vscode.window.onDidChangeActiveTextEditor ( update ),
             vscode.workspace.onDidChangeTextDocument ( update ),
             vscode.workspace.onDidSaveTextDocument ( update ),

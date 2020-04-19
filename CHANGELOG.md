@@ -4,6 +4,12 @@ All notable changes to the "file-path-bar" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 2.1.0 - 2020-04-19
+
+### Added
+
+- `filePathBar.pathStyle` setting
+
 ## 2.0.0 - 2020-04-16
 
 ### Changed

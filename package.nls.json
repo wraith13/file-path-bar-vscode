@@ -1,6 +1,7 @@
 {
     "filePathBar.menu.title": "Show Menu ...",
     "filePathBar.statusBarAlignment.description": "Alignment on status bar. Requires a restart to take effect.",
+    "filePathBar.pathStyle.description": "The style of the path to be displayed in the status bar.",
     "File: Reval in File Explorer": "File: Reval in File Explorer",
     "File: Reval in Finder": "File: Reval in Finder",
     "File: Copy Path of Active File": "File: Copy Path of Active File",
