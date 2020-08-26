@@ -4,6 +4,12 @@ All notable changes to the "file-path-bar" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 2.1.1 - 2020-08-27
+
+### Fixed
+
+- Fixed wrong description in README.
+
 ## 2.1.0 - 2020-04-19
 
 ### Added

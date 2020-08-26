@@ -6,7 +6,8 @@ Show active file path in status bar.
 
 ## Features
 
-File Path Bar scans your code and enumerates all tokens and provides access to them.
+- show active file path in status bar.
+- show active file's menus when click status bar item.
 
 ![screenshot](images/screenshot.png)
 
