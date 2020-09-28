@@ -4,6 +4,12 @@ All notable changes to the "file-path-bar" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 2.1.2 - 2020-09-27
+
+### Security
+
+- `npm audit fix --force`
+
 ## 2.1.1 - 2020-08-27
 
 ### Fixed
