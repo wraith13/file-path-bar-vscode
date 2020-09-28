@@ -1,57 +1,35 @@
 import * as vscode from 'vscode';
 import * as os from 'os';
-import * as Config from "./lib/config";
-import * as Locale from "./lib/locale";
+import * as vscel from '@wraith13/vscel';
+import packageJson from "../package.json";
+import localeEn from "../package.nls.json";
+import localeJa from "../package.nls.ja.json";
+export type LocaleKeyType = keyof typeof localeEn;
+const locale = vscel.locale.make(localeEn, { "ja": localeJa });
+const configRoot = vscel.config.makeRoot(packageJson);
 const statusBarAlignmentObject = Object.freeze
 ({
     "none" : undefined,
     "left" : vscode.StatusBarAlignment.Left,
     "right" : vscode.StatusBarAlignment.Right,
 });
-export const statusBarAlignment = new Config.MapEntry ( "filePathBar.statusBarAlignment", statusBarAlignmentObject );
+export const statusBarAlignment = configRoot.makeMapEntry ( "filePathBar.statusBarAlignment", statusBarAlignmentObject );
 const pathStyleObject = Object.freeze
 ({
     "absolute" : (path: string) => path,
     "relative" : (path: string) => vscode.workspace.asRelativePath(path),
 });
-export const pathStyle = new Config.MapEntry ( "filePathBar.pathStyle", pathStyleObject );
+export const pathStyle = configRoot.makeMapEntry ( "filePathBar.pathStyle", pathStyleObject );
 const hasActiveDocument = ( ) => undefined !== vscode.window.activeTextEditor && undefined !== vscode.window.activeTextEditor.viewColumn;
 module StatusBarItem
 {
-    const create =
-    (
-        properties :
-        {
-            alignment ? : vscode.StatusBarAlignment,
-            text ? : string,
-            command ? : string,
-            tooltip ? : string
-        }
-    )
-    : vscode.StatusBarItem =>
-    {
-        const result = vscode.window.createStatusBarItem ( properties.alignment );
-        if ( undefined !== properties.text )
-        {
-            result.text = properties.text;
-        }
-        if ( undefined !== properties.command )
-        {
-            result.command = properties.command;
-        }
-        if ( undefined !== properties.tooltip )
-        {
-            result.tooltip = properties.tooltip;
-        }
-        return result;
-    };
     let pathLabel: vscode.StatusBarItem;
-    export const make = ( ) => pathLabel = create
+    export const make = ( ) => pathLabel = vscel.statusbar.createItem
     ({
         alignment : statusBarAlignment.get( "" ),
         text : `$(file) dummy`,
         command : `filePathBar.menu`,
-        tooltip : Locale.map ( "filePathBar.menu.title" ),
+        tooltip : locale.map ( "filePathBar.menu.title" ),
     });
     export const update = ( ) : void =>
     {
@@ -109,7 +87,7 @@ module FilePathBar
         {
             const commands:
             {
-                label: Locale.KeyType,
+                label: LocaleKeyType,
                 command: string,
             }[] =
             [
@@ -152,8 +130,8 @@ module FilePathBar
                     (
                         i =>
                         ({
-                            label: Locale.map ( i.label ),
-                            detail: i.label === Locale.map ( i.label ) ? undefined: i.label,
+                            label: locale.map ( i.label ),
+                            detail: i.label === locale.map ( i.label ) ? undefined: i.label,
                             action: async ( ) => await vscode.commands.executeCommand ( i.command, document.uri ),
                         })
                     ),
