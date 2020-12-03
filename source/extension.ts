@@ -9,50 +9,50 @@ const locale = vscel.locale.make(localeEn, { "ja": localeJa });
 const configRoot = vscel.config.makeRoot(packageJson);
 const statusBarAlignmentObject = Object.freeze
 ({
-    "none" : undefined,
-    "left" : vscode.StatusBarAlignment.Left,
-    "right" : vscode.StatusBarAlignment.Right,
+    "none": undefined,
+    "left": vscode.StatusBarAlignment.Left,
+    "right": vscode.StatusBarAlignment.Right,
 });
-export const statusBarAlignment = configRoot.makeMapEntry ( "filePathBar.statusBarAlignment", statusBarAlignmentObject );
+export const statusBarAlignment = configRoot.makeMapEntry("filePathBar.statusBarAlignment", statusBarAlignmentObject);
 const pathStyleObject = Object.freeze
 ({
-    "absolute" : (path: string) => path,
-    "relative" : (path: string) => vscode.workspace.asRelativePath(path),
+    "absolute": (path: string) => path,
+    "relative": (path: string) => vscode.workspace.asRelativePath(path),
 });
-export const pathStyle = configRoot.makeMapEntry ( "filePathBar.pathStyle", pathStyleObject );
-const hasActiveDocument = ( ) => undefined !== vscode.window.activeTextEditor && undefined !== vscode.window.activeTextEditor.viewColumn;
+export const pathStyle = configRoot.makeMapEntry ("filePathBar.pathStyle", pathStyleObject);
+const hasActiveDocument = () => undefined !== vscode.window.activeTextEditor && undefined !== vscode.window.activeTextEditor.viewColumn;
 module StatusBarItem
 {
     let pathLabel: vscode.StatusBarItem;
-    export const make = ( ) => pathLabel = vscel.statusbar.createItem
+    export const make = () => pathLabel = vscel.statusbar.createItem
     ({
-        alignment : statusBarAlignment.get( "" ),
-        text : `$(file) dummy`,
-        command : `filePathBar.menu`,
-        tooltip : locale.map ( "filePathBar.menu.title" ),
+        alignment: statusBarAlignment.get(""),
+        text: `$(file) dummy`,
+        command: `filePathBar.menu`,
+        tooltip: locale.map ( "filePathBar.menu.title" ),
     });
-    export const update = ( ) : void =>
+    export const update = (): void =>
     {
         const document = vscode.window.activeTextEditor?.document;
-        if ( hasActiveDocument ( ) && document )
+        if (hasActiveDocument() && document)
         {
-            pathLabel.text = `${ document.isDirty ? "$(primitive-dot)": "$(file)" } ${ pathStyle.get( "" )( document.fileName ) }`;
-            pathLabel.show ( );
+            pathLabel.text = `${document.isDirty ? "$(primitive-dot)": "$(file)"} ${pathStyle.get("")(document.fileName)}`;
+            pathLabel.show();
         }
         else
         {
-            pathLabel.hide ( );
+            pathLabel.hide();
         }
     };
 }
 module FilePathBar
 {
-    export const activate = ( context: vscode.ExtensionContext ) =>
+    export const activate = (context: vscode.ExtensionContext) =>
     {
         context.subscriptions.push
         (
-            StatusBarItem.make ( ),
-            vscode.commands.registerCommand ( `filePathBar.menu`, menu ),
+            StatusBarItem.make(),
+            vscode.commands.registerCommand(`filePathBar.menu`, menu),
             vscode.workspace.onDidChangeConfiguration
             (
                 async () =>
@@ -61,29 +61,29 @@ module FilePathBar
                     await update();
                 }
             ),
-            vscode.window.onDidChangeActiveTextEditor ( update ),
-            vscode.workspace.onDidChangeTextDocument ( update ),
-            vscode.workspace.onDidSaveTextDocument ( update ),
+            vscode.window.onDidChangeActiveTextEditor(update),
+            vscode.workspace.onDidChangeTextDocument(update),
+            vscode.workspace.onDidSaveTextDocument(update),
         );
         update ( );
     };
-    export const deactivate = ( ) =>
+    export const deactivate = () =>
     {
     };
-    export const update = async ( ) =>
+    export const update = async () =>
     {
         await vscode.commands.executeCommand
         (
             'setContext',
             'existsActiveTextDocument',
-            hasActiveDocument ( )
+            hasActiveDocument()
         );
-        StatusBarItem.update ( );
+        StatusBarItem.update();
     };
-    export const menu = async ( ) =>
+    export const menu = async () =>
     {
         const document = vscode.window.activeTextEditor?.document;
-        if ( hasActiveDocument ( ) && document )
+        if (hasActiveDocument() && document)
         {
             const commands:
             {
@@ -130,9 +130,9 @@ module FilePathBar
                     (
                         i =>
                         ({
-                            label: locale.map ( i.label ),
-                            detail: i.label === locale.map ( i.label ) ? undefined: i.label,
-                            action: async ( ) => await vscode.commands.executeCommand ( i.command, document.uri ),
+                            label: locale.map(i.label),
+                            detail: i.label === locale.map(i.label) ? undefined: i.label,
+                            action: async () => await vscode.commands.executeCommand(i.command, document.uri),
                         })
                     ),
                     {
@@ -140,7 +140,7 @@ module FilePathBar
                     }
                 )
             )
-            ?.action ( );
+            ?.action();
         }
     };
 }
