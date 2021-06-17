@@ -4,7 +4,7 @@ All notable changes to the "file-path-bar" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## 2.1.4 - 2021-??-??
+## 2.1.4 - 2021-06-18
 
 ### Changed
 
