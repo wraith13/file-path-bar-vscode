@@ -78,7 +78,7 @@
         "test": "node ./out/test/runTest.js"
     },
     "dependencies": {
-        "@wraith13/vscel": "^0.0.13"
+        "@wraith13/vscel": "^0.0.49"
     },
     "devDependencies": {
         "@types/glob": "^7.1.1",

@@ -13,20 +13,20 @@ const statusBarAlignmentObject = Object.freeze
     "left": vscode.StatusBarAlignment.Left,
     "right": vscode.StatusBarAlignment.Right,
 });
-export const statusBarAlignment = configRoot.makeMapEntry("filePathBar.statusBarAlignment", statusBarAlignmentObject);
+export const statusBarAlignment = configRoot.makeMapEntry("filePathBar.statusBarAlignment", "root-workspace", statusBarAlignmentObject);
 const pathStyleObject = Object.freeze
 ({
     "absolute": (path: string) => path,
     "relative": (path: string) => vscode.workspace.asRelativePath(path),
 });
-export const pathStyle = configRoot.makeMapEntry ("filePathBar.pathStyle", pathStyleObject);
+export const pathStyle = configRoot.makeMapEntry ("filePathBar.pathStyle", "root-workspace", pathStyleObject);
 const hasActiveDocument = () => undefined !== vscode.window.activeTextEditor && undefined !== vscode.window.activeTextEditor.viewColumn;
 module StatusBarItem
 {
     let pathLabel: vscode.StatusBarItem;
     export const make = () => pathLabel = vscel.statusbar.createItem
     ({
-        alignment: statusBarAlignment.get(""),
+        alignment: statusBarAlignment.get("default-scope"),
         text: `$(file) dummy`,
         command: `filePathBar.menu`,
         tooltip: locale.map ( "filePathBar.menu.title" ),
@@ -36,7 +36,7 @@ module StatusBarItem
         const document = vscode.window.activeTextEditor?.document;
         if (hasActiveDocument() && document)
         {
-            pathLabel.text = `${document.isDirty ? "$(primitive-dot)": "$(file)"} ${pathStyle.get("")(document.fileName)}`;
+            pathLabel.text = `${document.isDirty ? "$(primitive-dot)": "$(file)"} ${pathStyle.get("default-scope")(document.fileName)}`;
             pathLabel.show();
         }
         else
@@ -57,7 +57,7 @@ module FilePathBar
             (
                 async () =>
                 {
-                    pathStyle.clear();
+                    //pathStyle.clear();
                     await update();
                 }
             ),
