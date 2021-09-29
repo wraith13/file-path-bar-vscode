@@ -2,12 +2,12 @@
     "filePathBar.menu.title": "Show Menu ...",
     "filePathBar.statusBarAlignment.description": "Alignment on status bar. Requires a restart to take effect.",
     "filePathBar.pathStyle.description": "The style of the path to be displayed in the status bar.",
-    "File: Reval in File Explorer": "File: Reval in File Explorer",
-    "File: Reval in Finder": "File: Reval in Finder",
+    "File: Reveal in File Explorer": "File: Reveal in File Explorer",
+    "File: Reveal in Finder": "File: Reveal in Finder",
     "File: Copy Path of Active File": "File: Copy Path of Active File",
     "File: Copy Relative Path of Active File": "File: Copy Relative Path of Active File",
     "File: Compare Active File With...": "File: Compare Active File With...",
     "File: Compare Active File with Clipboard": "File: Compare Active File with Clipboard",
     "File: Compare Active File with Saved": "File: Compare Active File with Saved",
-    "File: Reval Active File in Side Bar": "File: Reval Active File in Side Bar"
+    "File: Reveal Active File in Side Bar": "File: Reveal Active File in Side Bar"
 }

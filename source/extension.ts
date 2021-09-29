@@ -93,8 +93,8 @@ module FilePathBar
             [
                 {
                     label: "darwin" === os.platform() ?
-                        "File: Reval in Finder":
-                        "File: Reval in File Explorer",
+                        "File: Reveal in Finder":
+                        "File: Reveal in File Explorer",
                     command: "revealFileInOS",
                 },
                 {
@@ -118,7 +118,7 @@ module FilePathBar
                     command: "workbench.files.action.compareWithSaved",
                 },
                 {
-                    label: "File: Reval Active File in Side Bar",
+                    label: "File: Reveal Active File in Side Bar",
                     command: "workbench.files.action.showActiveFileInExplorer",
                 }
             ];
