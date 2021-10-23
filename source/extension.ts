@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
-import * as os from 'os';
+// import * as os from 'os';
 import * as vscel from '@wraith13/vscel';
 import packageJson from "../package.json";
 import localeEn from "../package.nls.json";
 import localeJa from "../package.nls.ja.json";
+import { platform } from 'process';
 export type LocaleKeyType = keyof typeof localeEn;
 const locale = vscel.locale.make(localeEn, { "ja": localeJa });
 const configRoot = vscel.config.makeRoot(packageJson);
@@ -92,7 +93,7 @@ module FilePathBar
             }[] =
             [
                 {
-                    label: "darwin" === os.platform() ?
+                    label: "darwin" === platform ?
                         "File: Reveal in Finder":
                         "File: Reveal in File Explorer",
                     command: "revealFileInOS",
