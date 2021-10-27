@@ -1,5 +1,6 @@
 .vscode/**
 .vscode-test/**
+.vscode-test-web/**
 out/test/**
 source/**
 .gitignore
@@ -9,3 +10,4 @@ webpack.config.js
 **/.eslintrc.json
 **/*.map
 **/*.ts
+private/**
