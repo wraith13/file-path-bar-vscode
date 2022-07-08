@@ -4,7 +4,12 @@ All notable changes to the "file-path-bar" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## 2.1.7 - 202?-??-??
+## 2.1.7 - 2022-07-08
+
+### Added
+
+- Also released on [github.com](https://github.com/wraith13/file-path-bar-vscode/releases)
+- VSIX download link in README.md
 
 ### Security
 
